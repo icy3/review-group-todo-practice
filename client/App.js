@@ -27,18 +27,28 @@ axios.delete(`/deleteJob/${id}`)
 })
 }
 
-
-
-////
-
-////
 getJobs(){
     axios.get('/jobs').then(jobs => this.setState({jobs:jobs.data}));
 }
     // .catch(function(error){
         //     console.log(error);
         // })
-//
+/*
+axios.get('/jobs')
+  .then(function(response) {
+    return axios.all([ axios.get('/jobs'), axios.get('/jobs') ]);
+  })
+  .then(function(responses) {
+    const [
+      preferencesResponse,
+      rolesResponse
+    ] = responses;
+    // do more things
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+*/
 sendJob() {
     axios.post('/jobs', {
         newJob: this.state.stringJob})
@@ -47,14 +57,49 @@ sendJob() {
         this.getJobs();
         
         //     // console.log(response);
-        // })
+        })
         // .catch(function(error) {
         //     console.log(error);
         // })
-        })}
+        }
+
+//         QQQQQQQQQ
+// bigCall () {
+// axios.get('/jobs').then(function(response) {
+//     return axios.all([ axios.get('/jobs'), axios.get('/jobs') ]);
+//   })
+//   .then(function(responses) {
+//     const [
+//       preferencesResponse,
+//       rolesResponse
+//     ] = responses;
+//     // do more things
+//   })
+//   .catch(function(error) {
+//     console.log(error);
+//   });
+// }
+
+// function makeRequestsFromArray(arr) {
+//     let index = 0;
+//     function request() {
+//         return axios.get('http://localhost:3000/api/' + index).then(() => {
+//             index++;
+//             if (index >= arr.length) {
+//                 return 'done'
+//             }
+//             return request();
+//         });
+
+//     }
+//     return request();
+// }
+
+// makeRequestsFromArray([0, 1, 2]);
+//          WQQQQQQQQQQQQ
 
     onClickValue(event){
-        event.preventDefault();
+    
         this.setState({
             stringJob:event.target.value
         })
@@ -63,23 +108,26 @@ sendJob() {
     onClickHandle() {
         let temp = this.state.jobs
         temp.push(this.state.stringJob)
-        this.setState({jobs:this.state.temp, stringJob:''})
+        this.setState({jobs:this.state.temp})
     }
 
     render() {
          return (
              <div>
+             
                 <input value={this.state.stringJob} onChange={this.onClickValue} />
-                <button onClick = {this.sendJob} onChange={this.onClickHandle}>Add Jobs</button> 
-                {this.state.jobs.map((item,index) => {
+                <button onClick = {this.sendJob} >Add Jobs</button> 
+           
+                {this.state.jobs.map(item => {
                      return (
                         <Job 
-                        key={index}
+                        key={item.id}
                         id={item.id} 
-                        item={item} 
-                        deleteJob={this.deleteJob}
+                        item={item.item} 
+                        deleteJob={this.deleteJob} 
                         />
-                      
+                        
+                        
                         
                         )
                     })}
@@ -90,4 +138,4 @@ sendJob() {
             }
 export default App
 
-//this.state.stringJob
+//this.state.stringJob === the current thing on the frontend
