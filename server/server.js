@@ -3,17 +3,16 @@ const cors = require("cors")
 const path = require("path");
 const db = require("./db.js")
 const app = express();
-const port = 4567
 //
-app.use(express.static(path.join(__dirname, "../dist")))
 app.use(cors())
+app.use(express.static(path.join(__dirname, "../dist")))
 app.use(express.json())
 
-
+const port = 5000;
 
 app.post("/jobs", (req, res) => {
-  const job = req.body.job
-  console.log(task)
+  const job = req.body.newJob
+  console.log(job)
   db.addJob(job, (err, data) => {
     if (err) {
       console.error(err)
@@ -33,12 +32,10 @@ app.get("/jobs", (req, res) => {
 })
 
 
-
-
-app.delete("/job/:id", (req, res) => {
+app.delete("/deleteJob/:id", (req, res) => {
   const id = req.params.id;
   console.log("id from server", id)
-  db.deletejob(id, (err, data) => {
+  db.deleteJob(id, (err, data) => {
     if (err) {
       console.error(err)
     } else {

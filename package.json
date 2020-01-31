@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "jest",
-    "start": "webpack -d --watch & live-server --port=3030 --watch=dist --open=dist",
-    "start-oh": "webpack -d --watch"
+    "start": "webpack -d --watch",
+    "server": "nodemon ./server/server.js"
   },
   "repository": {
     "type": "git",

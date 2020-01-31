@@ -1,11 +1,12 @@
 import React from "react";
 
-const  Job = props => (
-  <div key={`Job${props.id}`}>
-    <span>{props.job}</span>
+const Job = props => (
+  <div >
+    {/* {console.log(props)} */}
+    {/* <div>{props.item}</div>
     <button value={props.id} onClick={props.deleteJob}>
       DeleteMe
-    </button>
+    </button> */}
   </div>
 );
 
