@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Job from './Job.js'
-
+import Update from './Update.js'
 class App extends React.Component {
 constructor(props){
     super(props)
@@ -30,6 +30,18 @@ axios.delete(`/deleteJob/${id}`)
 getJobs(){
     axios.get('/jobs').then(jobs => this.setState({jobs:jobs.data}));
 }
+
+// updateFromDb () {
+//     axios.get('/api/categoryFromDb')
+//     .then( (response) => {
+//       console.log(response.data)
+//       this.setState({lastOne:response.data})
+
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+//   }
     // .catch(function(error){
         //     console.log(error);
         // })
@@ -114,6 +126,7 @@ sendJob() {
     render() {
          return (
              <div>
+                 <Update jobs={this.state.jobs} />
              
                 <input value={this.state.stringJob} onChange={this.onClickValue} />
                 <button onClick = {this.sendJob} >Add Jobs</button> 
